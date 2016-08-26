@@ -1,6 +1,6 @@
 # Do Less
 
-This is a basic front-end framework to quickly get started with a front-end project. The framework focuses on speed so there are no unnecessary styles set by default (e.g. color classes, grid columns etc.), instead you should build up classes as and when they are needed. This approach should make for a lightweight css file. 
+This is a basic framework to quickly get started with a front-end project. The framework focuses on speed so there are no unnecessary styles set by default (e.g. color classes, grid columns etc.), instead you should build up classes as and when they are needed. This approach should make for a lightweight css file. 
 
 ## Development directory
 
@@ -28,20 +28,22 @@ The framework uses Gulp as a task runner. All of the Gulp specific settings can 
 
 ### 6. Gulp tasks
 
-There are two gulp tasks (**development** and **production**) which are controlled with the node scripts `npm run development` and `npm run production`.
+There are two gulp tasks (**development** and **production**) which are controlled with the node scripts `npm run development` and `npm run production`. The development command starts a proxy server with BrowserSync, so make sure `proxy` has been set correctly in `config.js`.
 
 ## sass architecture
 
-The sass directory tries to adhere to the ITCSS methodology: [https://www.youtube.com/watch?v=1OKZOV-iLj4](https://www.youtube.com/watch?v=1OKZOV-iLj4). There are a few guidlines to working with the css:
+The sass directory tries to adhere to the ITCSS methodology ([watch this presentation](https://www.youtube.com/watch?v=1OKZOV-iLj4) if you are unfamiliar with ITCSS).
+
+There are also a few guidlines for working with the css to create a maintainable and consistent architecture:
 
 1. Only apply margin to left and bottom of elements for consistent and behaviour when moving page elements.
  
-2. Use BEM syntax for class naming conventions [http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+2. Use BEM syntax for class naming conventions [http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/).
 
-3. Add styles in alphabetical order (e.g. background, border, color, font)
+3. Add styles in alphabetical order (e.g. background, border, color, font).
 
-4. Add media queries on a per style block basis (i.e. not in a separate file)
+4. Add media queries on a per style block basis (i.e. not in a separate file).
 
-5. Use `/* Magic number */` when adding integer styles to modify element alignment. It makes for a quick reference when updating in the future
+5. Use `/* Magic number */` when adding integer styles to modify element alignment. It makes for a quick reference when updating in the future.
 
-6. Write as much documentation and comments as possible to make it obvious what your code does 
+6. Write as much documentation and comments as possible to make the purpose of your code obvious. 
