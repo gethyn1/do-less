@@ -33,28 +33,3 @@
 		}
 	}
 }
-
-
-/* 
-
- Create breakpoint spacing classes
- - - - - - -
-
-*/
-
-@if map-get($spacing, scaffold) {
-	@each $breakpoint_name, $breakpoint_value in $breakpoints {
-		
-		/* Only create breakpoint if value greater than 1 */
-		@if $breakpoint_value > 1 {	
-
-			@include breakpoint($breakpoint_name) {
-				@include generate_spacing_classes(#{$breakpoint_name}-);
-			}
-		}
-
-		@else {
-			@include generate_spacing_classes();
-		}	
-	}
-}

@@ -20,4 +20,4 @@ $breakpoints: (
 
 */
 
-$nav_breakpoint: 768;
+$nav_breakpoint: map-get($breakpoints, m);

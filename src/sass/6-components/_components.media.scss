@@ -6,11 +6,11 @@
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
 
-// .lazy-load, .lazy-background {
-// 	opacity: 0;
-// 	transition: all .2s ease;
-// }
+.lazy-load, .lazy-background {
+	opacity: 0;
+	transition: all .2s ease;
+}
 
-// .is-loaded {
-// 	opacity: 1;
-// }
+.is-loaded {
+	opacity: 1;
+}

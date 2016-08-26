@@ -6,40 +6,50 @@
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
 
-// .error-info {
-// 	margin-top: rem(5);
-// 	color: $error-color;
-// 	font-size: rem(13);
-// 	font-weight: $bold;
-// }
 
-// .field-error {
-// 	display: none;
-// 	margin-bottom: 0;
-// }
+/*
 
-// [class*="field-error"] {
-// 	label {
-// 		color: $error-color;
-// 	}
+ Scaffold form validation styles if set to true in settings.forms
+- - - - - -
 
-// 	input[type="text"] {
-// 		border: 2px solid $error-color;
-// 	}
-// }
+*/
 
-// .field-error-required {
-// 	[data-error="required"] {
-// 		display: block;
-// 	}
-// }
+@if $scaffold-validation {
+	.error-info {
+		margin-top: rem(5);
+		color: $error-color;
+		font-size: rem(13);
+		font-weight: $bold;
+	}
 
-// .field-error-email {
-// 	[data-error="email"] {
-// 		display: block;
-// 	}
-// }
+	.field-error {
+		display: none;
+		margin-bottom: 0;
+	}
 
-// [data-server-errors="false"] {
-// 	display: none;
-// }
+	[class*="field-error"] {
+		label {
+			color: $error-color;
+		}
+
+		input[type="text"] {
+			border: 2px solid $error-color;
+		}
+	}
+
+	.field-error-required {
+		[data-error="required"] {
+			display: block;
+		}
+	}
+
+	.field-error-email {
+		[data-error="email"] {
+			display: block;
+		}
+	}
+
+	[data-server-errors="false"] {
+		display: none;
+	}
+}

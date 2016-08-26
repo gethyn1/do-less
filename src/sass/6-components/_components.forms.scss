@@ -9,12 +9,14 @@
 
 /*
 
- Generate custom placeholder styles
+ Generate custom placeholder styles if set to true in settings.forms
 - - - - - -
 
 */
 
-// @include generate_placeholder_styles();
+@if map-get($placeholders, generate-styles) {
+	@include generate_placeholder_styles();
+}
 
 
 /*
@@ -24,10 +26,10 @@
 
 */
 
-// .form-group {
-// 	input[type="text"], input[type="number"], input[type="tel"], select,
-// 	textarea {
-// 		display: block;
-// 		width: 100%;
-// 	}
-// }
+.form-group {
+	input[type="text"], input[type="number"], input[type="tel"], select,
+	textarea {
+		display: block;
+		width: 100%;
+	}
+}

@@ -6,6 +6,13 @@
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
 
+/* 
+
+ Inputs
+ - - - - - - 
+
+*/
+
 $inputs: (
 	height: 50px,
 	padding: 14px,
@@ -14,10 +21,38 @@ $inputs: (
 	border-radius: initial
 );
 
+
+/* 
+
+ Input placeholders
+ - - - - - - 
+
+*/
+
 $placeholders: (
+	generate-styles: false,
 	color: #999,
 	font-weight: normal,
 	font-family: inherit,
 	font-style: normal,
 	text-transform: inherit
 );
+
+
+/* 
+
+ Custom select
+ - - - - - - 
+
+*/
+
+$scaffold-custom-select: false;
+
+
+/* 
+
+ Validation styles
+ - - - - - - 
+
+*/
+$scaffold-validation: false;

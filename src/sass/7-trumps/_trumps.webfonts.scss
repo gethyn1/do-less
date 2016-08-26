@@ -6,21 +6,31 @@
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
 
-/* Font loading classes */
-// .wf-loading {
-// 	h1, h2, h3, h4, p {
-// 		visibility: hidden;
-// 	}
+/* 
 
-// 	&.no-js {
-// 		h1, h2, h3, h4, p {
-// 			visibility: visible;
-// 		}
-// 	}
-// }
+ Font loading classes
+ - - - - - -
 
-// .wf-active {
-//     h1, h2, h3, h4, p {
-// 		visibility: visible;
-// 	}
-// }
+ Scaffold font loading classes if set to true in settings.typography
+
+*/
+
+@if $scaffold-webfont-classes {
+	.wf-loading {
+		h1, h2, h3, h4, p {
+			visibility: hidden;
+		}
+
+		&.no-js {
+			h1, h2, h3, h4, p {
+				visibility: visible;
+			}
+		}
+	}
+
+	.wf-active {
+	    h1, h2, h3, h4, p {
+			visibility: visible;
+		}
+	}
+}
