@@ -1,0 +1,31 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ trumps.text
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+.text-small {
+	font-size: rem(12) !important;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+.text-light {
+	font-weight: $light !important;
+}
+
+.text-primary {
+	color: $primary-color !important;
+}
+
+.text-default {
+	color: $black !important;
+}
+
+.text-invert {
+	color: $white !important;
+}

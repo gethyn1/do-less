@@ -1,0 +1,72 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ tools.placeholders
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/*
+
+ Generate custom styles for placeholders
+ - - - - - -
+
+*/
+
+@mixin generate_placeholder_styles(
+	$weight: map-get($placeholders, font-weight),
+	$font-family: map-get($placeholders, font-family),
+	$font-style: map-get($placeholders, font-style),
+	$color: map-get($placeholders, color),
+	$text-transform: map-get($placeholders, text-transform)
+) {
+	
+	.input-placeholder {
+		@if($weight) 			{ font-weight: $weight; }
+		@if($font-family) 		{ font-family: $font-family; }
+		@if($font-style) 		{ font-style: $font-style; }
+		@if($color) 			{ color: $color; }
+		@if($text-transform) 	{ text-transform: $text-transform; }
+	}
+	input-placeholder {
+		@if($weight) 			{ font-weight: $weight; }
+		@if($font-family) 		{ font-family: $font-family; }
+		@if($font-style) 		{ font-style: $font-style; }
+		@if($color) 			{ color: $color; }
+		@if($text-transform) 	{ text-transform: $text-transform; }
+		opacity: 1;
+	}
+	::-webkit-input-placeholder {
+		@if($weight) 			{ font-weight: $weight; }
+		@if($font-family) 		{ font-family: $font-family; }
+		@if($font-style) 		{ font-style: $font-style; }
+		@if($color) 			{ color: $color; }
+		@if($text-transform) 	{ text-transform: $text-transform; }
+		opacity: 1;
+	}
+	:-moz-placeholder {
+		@if($weight) 			{ font-weight: $weight; }
+		@if($font-family) 		{ font-family: $font-family; }
+		@if($font-style) 		{ font-style: $font-style; }
+		@if($color) 			{ color: $color; }
+		@if($text-transform) 	{ text-transform: $text-transform; }
+		opacity: 1;
+	}
+	::-moz-placeholder {
+		@if($weight) 			{ font-weight: $weight; }
+		@if($font-family) 		{ font-family: $font-family; }
+		@if($font-style) 		{ font-style: $font-style; }
+		@if($color) 			{ color: $color; }
+		@if($text-transform) 	{ text-transform: $text-transform; }
+		opacity: 1;
+	}
+	:-ms-input-placeholder {
+		@if($weight) 			{ font-weight: $weight; }
+		@if($font-family) 		{ font-family: $font-family; }
+		@if($font-style) 		{ font-style: $font-style; }
+		@if($color) 			{ color: $color; }
+		@if($text-transform) 	{ text-transform: $text-transform; }
+		opacity: 1;
+	}
+}

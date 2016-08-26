@@ -1,0 +1,23 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ settings.breakpoints
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+$breakpoints: (
+	s  : 0,
+	m  : 600,
+	l  : 900
+);
+
+
+/* 
+
+ Set an easy access breakpoint for mobile navigation
+ - - - - - - 
+
+*/
+
+$nav_breakpoint: 768;

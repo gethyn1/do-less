@@ -1,0 +1,68 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ settings.color
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ Scaffold color classes
+ - - - - - -
+
+ NOTE:
+
+ This gernerates a series of color classes defined in trumps.color
+ 
+*/
+
+$scaffold-color-classes: false;
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ quotes around colors as sass can get confused with browser color defaults.
+ Sass map is used for auto-generating color classes.
+ 
+*/
+
+$colors: (
+	'black': #000,
+	'blue': #2f7de5,
+	'grey': #889294,
+	'white': #fff
+);
+
+
+/* 
+
+ Give site colors an easy access handle
+ - - - - - - 
+
+*/
+
+$black				: map-get($colors, 'black');
+$blue				: map-get($colors, 'blue');
+$grey				: map-get($colors, 'grey');
+$white				: map-get($colors, 'white');
+
+
+/* 
+
+ Easy access reference handles
+ - - - - - - 
+
+*/
+
+$primary_color		: $blue;
+$success_color		: #9dc648;
+$error_color		: #fc3c40;
+
+$twitter_color 		: #55acee;
+$facebook_color 	: #3b5998;
+$google_color 		: #dd4b39;
+$whatsapp_color 	: #4dc247;

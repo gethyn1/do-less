@@ -1,0 +1,58 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ tools.breakpoints
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ Get breakpoint from default $breakpoint sass map
+ - - - - - -
+ 
+*/
+
+@function get_breakpoint($breakpoint_name) {
+	@return map-get($breakpoints, $breakpoint_name);
+}
+
+
+/* 
+
+ Generate breakpoint media query css
+ - - - - - -
+ 
+*/
+
+@mixin breakpoint($breakpoint_name, $threshold: min, $dimension: width) {
+
+	// Get breakpoint unit value
+	$breakpoint_value: get_breakpoint($breakpoint_name);
+
+	// If null is returned from get_breakpoint() output the raw breakpoint_name value
+	@if ($breakpoint_value == null) {
+		$breakpoint_value: $breakpoint_name;
+	}
+
+	// Don't output in media query if breakpoint is 1
+	@if ($breakpoint_value <= 1) {
+		@content;
+	}
+
+	@else {
+		// If no unit specified use pixels
+		@if (unitless($breakpoint_value)) {
+			@media (#{$threshold}-#{$dimension}: #{$breakpoint_value}px) {
+				@content;
+			}
+		}
+
+		@else {
+			@media (#{$threshold}-#{$dimension}: $breakpoint_value) {
+				@content;
+			}
+		}
+	}
+}

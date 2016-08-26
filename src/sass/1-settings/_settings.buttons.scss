@@ -1,0 +1,23 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ settings.buttons
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ By default buttons are set with a height so they can be aligned with elements like form inputs.
+ Button height can be set to false to just use padding.
+ 
+*/
+
+$buttons: (
+  height: 50px,
+  padding: 36px
+);

@@ -1,0 +1,131 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ Main sass file
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/*
+
+ Rules for working with this css (sass) architecture
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ - Follow ITCSS css architecture: https://www.youtube.com/watch?v=1OKZOV-iLj4
+
+ - Only apply margin to left and bottom of elements for consistent and 
+   behaviour when moving page elements.
+ 
+ - Use BEM syntax for class naming conventions
+   http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/
+
+ - Add styles in alphabetical order (e.g. background, border, color, font)
+
+ - Add media queries on a per style block basis (i.e. not in a separate file)
+
+*/
+
+
+/*
+
+ 1. Settings
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+@import "1-settings/_settings.breakpoints";
+@import "1-settings/_settings.buttons";
+@import "1-settings/_settings.color";
+@import "1-settings/_settings.container";
+@import "1-settings/_settings.breakpoints";
+@import "1-settings/_settings.forms";
+@import "1-settings/_settings.grid";
+@import "1-settings/_settings.icons";
+@import "1-settings/_settings.media";
+@import "1-settings/_settings.ratios";
+@import "1-settings/_settings.spacing";
+@import "1-settings/_settings.typography";
+
+
+/*
+
+ 2. Tools
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/* Units first as used in other tools */
+@import "2-tools/_tools.units";
+@import "2-tools/_tools.breakpoints";
+@import "2-tools/_tools.buttons";
+@import "2-tools/_tools.clearfix";
+@import "2-tools/_tools.grid";
+@import "2-tools/_tools.media";
+@import "2-tools/_tools.placeholders";
+@import "2-tools/_tools.pseudo";
+@import "2-tools/_tools.spacing";
+@import "2-tools/_tools.typography";
+
+
+/*
+
+ 3. Generic
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+@import "3-generic/_generic.normalize";
+@import "3-generic/_generic.boxsizing";
+
+
+/*
+
+ 4. Base
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+@import "4-base/_base.forms";
+@import "4-base/_base.headings";
+@import "4-base/_base.links";
+@import "4-base/_base.media";
+@import "4-base/_base.page";
+
+
+/*
+
+ 5. Objects
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+@import "5-objects/_objects.container";
+@import "5-objects/_objects.grid";
+@import "5-objects/_objects.lists";
+@import "5-objects/_objects.media";
+
+
+/*
+
+ 6. Components
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+@import "6-components/_components.branding";
+@import "6-components/_components.buttons";
+@import "6-components/_components.custom-select";
+@import "6-components/_components.forms";
+@import "6-components/_components.media";
+@import "6-components/_components.page-header";
+@import "6-components/_components.sections";
+@import "6-components/_components.site-footer";
+@import "6-components/_components.site-nav";
+@import "6-components/_components.top-bar";
+@import "6-components/_components.validation";
+
+
+/*
+
+ 7. Trumps
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+@import "7-trumps/_trumps.alignment";
+@import "7-trumps/_trumps.color";
+@import "7-trumps/_trumps.headings";
+@import "7-trumps/_trumps.icons";
+@import "7-trumps/_trumps.links";
+@import "7-trumps/_trumps.media";
+@import "7-trumps/_trumps.spacing";
+@import "7-trumps/_trumps.text";
+@import "7-trumps/_trumps.visibility";
+@import "7-trumps/_trumps.webfonts";

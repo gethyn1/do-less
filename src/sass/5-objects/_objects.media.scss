@@ -1,0 +1,43 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ objects.media
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ Create media placeholders
+ - - - - - -
+
+*/
+
+@if map-get($media, scaffold-media) {
+	.media-wrap {
+		position: relative;
+		overflow: hidden;
+		background: map-get($media, placeholder-background);
+
+		> *, img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+
+		/* Make sure iframe embeds fill container */
+		iframe {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	/* Generate aspect ratio classes */
+	@each $class_name, $list in $aspect_ratios {
+		.media-wrap--#{$class_name} {
+			@include aspect_ratio(nth($list, 1), nth($list, 2));
+		}
+	}
+}

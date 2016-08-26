@@ -1,0 +1,83 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ settings.typography
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+/* 
+
+ Import fonts from external services
+ - - - - - -
+ 
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Karla:400,700,400italic);
+
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ This sets the unit used for generated type sizes in _tols.typography.scss
+ 
+*/
+
+$type-scale-unit: 'em';
+
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ This sets base type sizes for the body element, list format `(font-size, line-height)`
+ 
+ - These are also used in em() function in generate_breakpoint_type_sizes()
+ 
+ - If other elements (headings etc.) are defined in ems, they will resize
+   proprtionally based on these values.
+ 
+*/
+
+$base-type-sizes: (
+	s  : (15, 24),
+	m  : (18, 27),
+	l  : (18, 27),
+	xl : (18, 27)
+);
+
+
+/* 
+
+ A ratio for using in conjunction woth type_scale() function
+ - - - - - -
+ 
+*/
+
+
+$type-ratio: $fourth;
+
+
+/* 
+
+ Typefaces
+ - - - - - -
+ 
+*/
+
+$body-font: 'Karla', sans-serif;
+
+
+/* 
+
+ Weights
+ - - - - - - 
+
+*/
+
+$light: 300;
+$normal: 400;
+$bold: 700;

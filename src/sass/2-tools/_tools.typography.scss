@@ -1,0 +1,168 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ tools.typography
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+/* 
+
+ Return a scale value based on ratio
+ - - - - - -
+
+ This is a very basic implementation of typographic scale. $ratio is in the
+ format 1.5 for perfect fifth. $int refers to progression up the scale
+ 
+*/
+
+@function type_scale($int, $ratio: $type-ratio, $base: 16) {
+	@return em(pow($ratio, $int) * $base);
+}
+
+
+/* 
+
+ Generate base font sizes
+ - - - - - -
+
+ NOTE:
+
+ Generate body font-sizes from `$breakpoints` and `$breakpoint_base_type_sizes` sass maps.
+ Update font-size on body to affect all relatively sized or unsized child elements.
+ 
+*/
+
+@mixin generate_base_font_sizes() {
+	
+	$current_font_size: 0;
+	$current_line_height: 0;
+
+	@each $breakpoint_ref, $base in $base_type_sizes {
+		
+		$font-size: nth($base, 1);
+		$line-height: nth($base, 2) / $font-size;
+
+		// Only write css if different from previous breakpoint value
+		@if($current_font_size != $font-size or $current_line_height != $line-height) {
+
+			@include breakpoint($breakpoint_ref) {
+				@if($current_font_size != $font-size) {
+					font-size: em($font-size);
+				}
+
+				@if($current_line_height != $line-height) {
+					line-height: $line-height;
+				}
+			}
+
+			// Cache current values
+			$current_font_size: $font-size;
+			$current_line_height: $line-height;
+		}
+	}
+}
+
+/* 
+
+ Generate line-height ratios for breakpoints
+ - - - - - -
+ 
+*/
+
+@mixin generate_breakpoint_vertical_rhythm($multiplier: 1) {
+	
+	$current_line_height: 0;
+
+	@each $breakpoint_ref, $base in $base_type_sizes {
+		
+		$line-height: nth($base, 2);
+
+		// Only write css if different from previous breakpoint value
+		@if($current_line_height != $line-height) {
+			@include breakpoint($breakpoint_ref) {
+				margin-bottom: rem($line-height * $multiplier);
+			}
+
+			// Cache current value
+			$current_line_height: $line-height;
+		}
+	}
+}
+
+
+/* 
+
+ Generate type sizes for different breakpoints
+ - - - - - -
+
+ NOTE:
+
+ By default we use ems for sizing so type can scale proportionally with page zoom.
+ If we don't set an overide at each breakpoint, font-sizes will scale proportional
+ to the base font-size set on the body. If this isn't desired behaviour then update
+ this unit to rem or px.
+ 
+*/
+
+@mixin breakpoint_type_sizes($map, $unit: $type_scale_unit, $base_map: $base_type_sizes) {
+	
+	// Cache current font-size
+	$current_font_size: 0;
+	$i: 0;
+
+	// Loop through breakpoints in type size map
+	@each $breakpoint_ref, $size in $map {
+
+		$font-size: nth($size, 1);
+		$line-height: nth($size, 2) / $font-size;
+
+		// Get the base font-size from base font size map for use with em() function
+		$base_font_list: map-get($base_map, $breakpoint_ref);
+		$base_font_size: nth($base_font_list, 1);
+		
+		// Only write css if different from previous breakpoint value
+		@if($current_font_size != $size) {
+			
+			// Mobile first: don't write media query for initial font-size
+			@if($i == 0) {
+				
+				// Select unit for size			
+				@if $unit == 'rem' {
+					font-size: rem($font-size);
+				}
+				@elseif $unit == 'em' {
+					// Calculate em with em() function and base font size from sass map
+					font-size: em($font-size, $base_font_size);
+				}
+				@else {
+					font-size: #{$font-size}px;
+				}
+			
+			// Write css media query
+			} @else {
+				
+				@include breakpoint($breakpoint_ref) {
+					// Select unit for size	
+					@if $unit == 'rem' {
+						font-size: rem($font-size);
+					}
+					@elseif $unit == 'em' {
+						// Calculate em with em() function and base font size from sass map
+						font-size: em($font-size, $base_font_size);
+					}
+					@else {
+						font-size: #{$font-size}px;
+					}
+				}
+			}
+
+			// Set line-height
+			line-height: $line-height;
+
+			// Update current font-size
+			$current_font_size: $size;
+			$i: $i+1;
+		}
+	}
+}

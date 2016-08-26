@@ -1,0 +1,87 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ objects.grid
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+$og-total-cols: map-get($grid, cols);
+$og-single-col-percentage: 100 / $og-total-cols;
+
+/* Grid container */
+
+@each $name, $value in $breakpoints {
+	@if $value == 0 {
+		.grid {
+			@include grid();
+		}
+	} @else {
+		@include breakpoint($name) {
+			.grid-#{$name} {
+				@include grid();
+			}
+		}
+	}
+}
+
+/* Allow grid cells to wrap */
+
+.grid--wrap {
+	flex-wrap: wrap;
+
+	@include no_flexbox() {
+		@include clearfix();
+
+		> * {
+			float: left;
+		}
+	}
+}
+
+/* Basic column */
+
+.col {
+	flex: 1;
+
+	@include no_flexbox() {
+		display: table-cell;
+		vertical-align: top;
+	}
+}
+
+
+/* 
+ 
+ Generate column span classes across breakpoints
+- - - - - -
+
+ We only generate these classes as required to cut down on unnecessary css.
+ Default classes are in the format `.col-{breakpoint}--{span}of{}total`
+ e.g. `.col-m--4of6`. A breakpoint set to 0 requires no breakpoint prefix. 
+
+*/
+
+@include scaffold_breakpoint_col(4);
+
+@include breakpoint_col('third', $og-total-cols / 3, $og-total-cols, (m: map-get($breakpoints, m)));
+
+
+/* Add gutters */
+
+.gutter {
+	padding-left: rem(map-get($grid, gutter));
+	padding-right: rem(map-get($grid, gutter));
+}
+
+/* Test content */
+
+.test {
+	background: #eee;
+	height: 100px;
+
+	.col:nth-child(even) & {
+		background: #ccc;
+	}
+}

@@ -1,0 +1,85 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ tools.units
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+/* 
+
+ POW - http://www.sassmeister.com/gist/10620fefd1ed75189f1b
+ - - - - - -
+ 
+*/
+
+@function pow($x, $y) {
+  $ret: 1;
+
+  @if $y > 0 {
+    @for $i from 1 through $y {
+        $ret: $ret * $x;
+    }
+  } 
+
+  @else {
+    @for $i from $y to 0 {
+        $ret: $ret / $x;
+    }
+  }
+
+  @return $ret;
+}
+
+
+/* 
+
+ Convert PX to EM
+ - - - - - -
+ 
+*/
+
+@function em($pixels, $context: 16) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1em;
+}
+
+
+/* 
+
+ Convert PX to REM
+ - - - - - -
+ 
+*/
+
+@function rem($pixels, $context: 16) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return ($pixels / $context) * 1rem;
+}
+
+
+/* 
+
+ Convert PX to %
+ - - - - - -
+ 
+*/
+
+@function pc($target, $context: 16) {
+  @if $target == 0 { @return 0 }
+  @return ($target / $context) * 100%;
+}

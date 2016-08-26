@@ -1,0 +1,46 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ settings.icons
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ - svg sprite generated using gulp with https://github.com/jkphl/gulp-svg-sprite
+
+ - icons are controlled by height (rather than width) to allow for equal horizontal spacing.
+ 
+*/
+
+/* 
+
+ Specify icon sizes
+ - - - - - - 
+
+*/
+
+$icon_sizes: 32;
+
+
+/* 
+
+ Specify ratios for irregular width icons (height / width) - or maybe (width / height ??)
+ - - - - - - 
+
+*/
+
+$icon_ratios: (
+	close			: 1,
+	facebook 		: 0.71875,
+	google-plus 	: 1.28125,
+	instagram		: 1,
+	playback 		: 1.51,
+	twitter 		: 1.125,
+	open-quote 		: 1.3
+);

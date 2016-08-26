@@ -1,0 +1,40 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ tools.buttons
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ Setup base styles for a button
+ - - - - - -
+ 
+*/
+
+@mixin button($height: map-get($buttons, height), $padding: map-get($buttons, padding)) {
+  display: inline-block;
+  
+  /* 
+
+   NOTE:
+   - - - - - -
+
+   Uses height so can be aligned with elements like form inputs
+   Height can be set to false to just use padding
+   
+  */
+
+  @if $height { 
+    height: $height; 
+    padding: 0 $padding;
+    line-height: $height;
+  } @else {
+    padding: $padding;
+  }
+  text-align: center;
+  text-decoration: none;
+
+}

@@ -1,0 +1,51 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ components.custom-select
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+// .custom-select {
+// 	position: relative;
+
+// 	select {
+// 		appearance: none;
+// 		height: map-get($inputs, height);
+// 		padding: 0 map-get($inputs, padding);
+// 		background: map-get($inputs, background);
+// 		border: map-get($inputs, border);
+// 		border-radius: map-get($inputs, border-radius);
+// 		cursor: pointer;
+// 		transition: background .1s ease;
+// 	}
+
+// 	/* Hide arrow for IE */
+// 	select::-ms-expand {
+// 		display: none;
+// 	}
+
+// 	&:before {
+// 		@include pseudo_block();
+// 		@include arrow(4px, $black, down);
+// 		top: rem(26);
+// 		margin-top: -2px;
+
+// 		[dir="ltr"] & {
+// 			right: rem(12);
+// 		}
+
+// 		[dir="rtl"] & {
+// 			right: rem(16);
+// 		}
+
+// 		.lt-ie10 & {
+// 			display: none;
+// 		}
+
+// 		/* Hide for IE9 as can't easily hide standard select arrow */
+// 		.no-csstransforms3d & {
+// 			display: none;
+// 		}
+// 	}
+// }

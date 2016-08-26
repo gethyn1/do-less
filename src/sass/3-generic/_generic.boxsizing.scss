@@ -1,0 +1,12 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ generic.boxsizing
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+* {
+	/* Set all elements to use border-box */
+	box-sizing: border-box;
+}

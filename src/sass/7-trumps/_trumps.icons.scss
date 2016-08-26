@@ -1,0 +1,22 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ trumps.icons
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+/* Set default fill for all icons */
+[class*="icon-"] {
+	fill: currentColor;
+}
+
+/* Create icon classes */
+@each $size in $icon_sizes {
+	@each $name, $ratio in $icon_ratios {
+		.icon-#{$name}-#{$size} {
+			height: #{$size}px;
+			width: #{$size * $ratio}px;
+		}
+	}
+}

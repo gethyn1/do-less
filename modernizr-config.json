@@ -1,0 +1,21 @@
+{
+  "minify": true,
+  "options": [
+    "html5shiv",
+    "setClasses"
+  ],
+  "feature-detects": [
+    "test/history",
+    "test/svg",
+    "test/touchevents",
+    "test/css/animations",
+    "test/css/borderimage",
+    "test/css/flexbox",
+    "test/css/flexboxlegacy",
+    "test/css/transforms3d",
+    "test/css/transitions",
+    "test/svg/asimg",
+    "test/svg/inline",
+    "test/forms/placeholder"
+  ]
+}

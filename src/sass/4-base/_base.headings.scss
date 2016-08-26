@@ -1,0 +1,49 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ base.headings
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ - Type size / line-height can be set for each element at different breakpoints
+   using the breakpoint_type_sizes() mixin.
+
+ - The mixin takes a sass map argument with nested lists for line-height and
+   font-size in the format (breakpoint: (font-size, line-height)) eg:
+   
+   @include breakpoint_type_sizes((s: (39.056, 58.5), l: (43.938, 65.9)))
+
+ - alternatively generate values using the type_scale() function
+ 
+*/
+
+
+h1, %heading-1 {
+	font-size: type_scale(4);
+}
+
+h2, %heading-2 {
+	font-size: type_scale(3);
+}
+
+h3, %heading-3 {
+	font-size: type_scale(2);
+}
+
+h4, %heading-4 {
+	font-size: type_scale(1);
+}
+
+h5, %heading-5 {
+	font-size: type_scale(0);
+}
+
+h6, %heading-6 {
+	font-size: type_scale(0);
+}

@@ -1,0 +1,72 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ base.page
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ - We are assuming browser's base font size is always 16px on html
+
+ - generate_base_font_sizes() can take optional unit argument to overide
+   default setting of `em`.
+ 
+*/
+
+body {
+    /* 
+
+     NOTE:
+     - - - - - -
+
+     This generates font size and line-height for each breakpoint
+     specified in _settings.typography.scss
+     
+    */
+    @include generate_base_font_sizes();
+    font-family: $body-font;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid;
+    margin: 10px 0;
+    padding: 0;
+}
+
+p {
+	text-rendering: optimizeLegibility;
+}
+
+strong {
+    font-weight: $bold;
+}
+
+blockquote, figure {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ Here we are setting a default bottom margin for block level elements
+ on each breakpoint, based on base font-size / line-height settings
+ set in _settings.typography.scss
+ 
+*/
+h1, h2, h3, h4, h5, h6, ul, ol, dd, p, figure, pre, table,
+fieldset, hr, blockquote {
+    margin-top: 0;
+    @include generate_breakpoint_vertical_rhythm();
+}

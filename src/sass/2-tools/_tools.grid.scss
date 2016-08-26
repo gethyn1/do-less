@@ -1,0 +1,155 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ tools.grid
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+$tg-total-cols: map-get($grid, cols);
+$tg-single-col-percentage: 100 / $tg-total-cols;
+
+
+/*
+ 
+ Display fallback styles for no flexbox support if `support-legacy` is set
+ to `true` in grid.settings
+ - - - - - - 
+
+*/
+
+@mixin no_flexbox() {
+	@if map-get($grid, support-legacy) {
+		.no-flexbox & {
+			@content;
+		}
+	}
+}
+
+
+/*
+ 
+ Generate styles for grid wrapper
+ - - - - - - 
+
+*/
+
+@mixin grid() {
+	display: flex;
+
+	@include no_flexbox() {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+	}
+}
+
+/*
+ 
+ Generate a single column class based on number of columns to span
+ - - - - - - 
+
+ $span: number of grid columns to span
+ $tg-total-cols: total number of columns in grid
+ $stop-flex: define whether to specify flex css property (only needed once per
+ class across breakpoints)
+
+*/
+
+@mixin grid_col($span: 1, $total: $tg-total-cols, $stop-flex: true) {
+	@if $stop-flex {
+		flex: none !important;
+
+		/* Fixes images breaking container in FF Developer Edition */
+		min-width: 0;
+	}
+
+	width: #{$tg-single-col-percentage * $span}% !important;
+}
+
+
+/*
+ 
+ Scaffold a responsive grid column with classname based on number of
+ columns to span and a breakpoint sass map
+ - - - - - - 
+
+ $span: number of grid columns to span
+ $tg-total-cols: total number of columns in grid
+ $map: a sass map of breakpoints in the format `(name: unit)`
+ $class: a prefix string for generating the class names
+
+*/
+
+@mixin scaffold_breakpoint_col($span: 1, $total: $tg-total-cols, $map: $breakpoints, $class: 'col') {
+
+	$stop-flex: true;
+
+	/* Loop through each breakpoint in settings.breakpoints */
+	@each $name, $value in $map {
+		
+		/* Mobile first: don't write media query if value is 0 */
+		@if($value == 0) {
+			
+			.#{$class}--#{$span}of#{$total} {
+				@include grid_col($span, $total, $stop-flex);
+			}
+
+		/* Write css media query */
+		} @else {
+			
+			@include breakpoint($name) {
+				.#{$class}-#{$name}--#{$span}of#{$total} {
+					@include grid_col($span, $total, $stop-flex);
+				}
+			}
+		}
+
+		$stop-flex: false;
+	}
+}
+
+
+/*
+ 
+ Generates breakpoints and values for a responsive grid column
+ based on number of columns to span and breakpoint sass map.
+ Gives slightly more granular control in class building than
+ @scaffold_breakpoint_col()
+ - - - - - - 
+
+ $class: css class name
+ $span: number of grid columns to span
+ $tg-total-cols: total number of columns in grid
+ $map: a sass map of breakpoints in the format `(name: unit)`
+
+*/
+
+@mixin breakpoint_col($class, $span: 1, $total: $tg-total-cols, $map: $breakpoints) {
+
+	$stop-flex: true;
+
+	/* Loop through each breakpoint in settings.breakpoints */
+	@each $name, $value in $map {
+		
+		/* Mobile first: don't write media query if value is 0 */
+		@if($value == 0) {
+			
+			.#{$class} {
+				@include grid_col($span, $total, $stop-flex);
+			}
+		
+		/* Write css media query */
+		} @else {
+
+			@include breakpoint($name) {
+				.#{$class} {
+					@include grid_col($span, $total, $stop-flex);
+				}
+			}
+		}
+
+		$stop-flex: false;
+	}
+	
+}

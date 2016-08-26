@@ -1,0 +1,23 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ tools.media
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ Generate aspect ratio as a percentage
+ - - - - - -
+ 
+*/
+
+@function aspect_ratio($x, $y) {
+  @return percentage($y/$x);
+}
+
+@mixin aspect_ratio($x, $y) {
+  padding-bottom: percentage($y/$x);
+}

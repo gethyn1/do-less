@@ -1,0 +1,33 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ components.forms
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/*
+
+ Generate custom placeholder styles
+- - - - - -
+
+*/
+
+// @include generate_placeholder_styles();
+
+
+/*
+
+ Form groups and rows
+- - - - - -
+
+*/
+
+// .form-group {
+// 	input[type="text"], input[type="number"], input[type="tel"], select,
+// 	textarea {
+// 		display: block;
+// 		width: 100%;
+// 	}
+// }

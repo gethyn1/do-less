@@ -1,0 +1,24 @@
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ settings.spacing
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
+/* 
+
+ NOTE:
+ - - - - - -
+
+ 0 is listed last so it can overide other settings
+ 
+*/
+
+$spacing: (
+	scaffold: false,
+	integers: 6 12 18 24 30 0,
+	padding-prefix: 'pad',
+	margin-prefix: 'space'
+);

@@ -1,0 +1,24 @@
+{
+  "name": "starter",
+  "description": "A starter setup for compiling sass and javascript",
+  "main": "",
+  "authors": [
+    "Gethyn Jones"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "normalize.css#~3.0.3",
+    "picturefill": "~3.0.2",
+    "fontfaceobserver": "^1.7.1"
+  }
+}
