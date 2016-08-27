@@ -5,6 +5,7 @@ const browserSync   = require('browser-sync').create();
 const gulp          = require('gulp');
 const gulp_if       = require('gulp-if');
 const gutil         = require('gulp-util');
+var nunjucksRender  = require('gulp-nunjucks-render');
 const plumber       = require('gulp-plumber');
 const rename        = require('gulp-rename');
 const sass          = require('gulp-sass');
@@ -26,6 +27,7 @@ const i = process.argv.indexOf('--env'),
 
 // Define general on error function
 const onError = function(err) {  
+    console.log(err);
     gutil.beep();
 };
 
@@ -61,6 +63,22 @@ const svgOptions = {
         doctypeDeclaration: false
     }
 };
+
+
+/*
+ 
+ html with nunjucks render
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+gulp.task('nunjucks', () => {
+  return gulp
+    .src(config.src.templates)
+    .pipe(plumber({ errorHandler: onError }))
+    .pipe(nunjucksRender({
+      path: [config.src.layouts]
+    }))
+    .pipe(gulp.dest(config.dest.html));
+});
 
 
 /*
@@ -125,7 +143,7 @@ gulp.task('svgSprite', () => {
  Third party scripts
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-gulp.task('copy-scripts', function() {
+gulp.task('copy-scripts', () => {
     return gulp
         .src(config.src.vendor)
         .pipe(rename({dirname: ''}))
@@ -138,12 +156,12 @@ gulp.task('copy-scripts', function() {
  BrowserSync
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-gulp.task('serve', ['sass', 'webpack', 'svgSprite', 'copy-scripts'], () => {
+gulp.task('serve', ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts'], () => {
 
     // Setup a proxy server
     browserSync.init({
         proxy: config.proxy,
-        port: 3001
+        port: 3000
     });
 
     // Watch files for updates and inject into page
@@ -155,7 +173,7 @@ gulp.task('serve', ['sass', 'webpack', 'svgSprite', 'copy-scripts'], () => {
     gulp.watch(config.dest.js + '/**/*.js').on('change', browserSync.reload);
 
     // Watch for changes to html
-    gulp.watch(config.src.html).on('change', browserSync.reload);
+    gulp.watch(config.src.html, ['nunjucks']).on('change', browserSync.reload);
 });
 
 
@@ -164,5 +182,5 @@ gulp.task('serve', ['sass', 'webpack', 'svgSprite', 'copy-scripts'], () => {
  Primary tasks
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-gulp.task('development', ['sass', 'webpack', 'svgSprite', 'copy-scripts', 'serve']);
-gulp.task('production', ['sass', 'webpack', 'svgSprite', 'copy-scripts']);
+gulp.task('development', ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts', 'serve']);
+gulp.task('production', ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts']);
