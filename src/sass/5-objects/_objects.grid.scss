@@ -40,6 +40,37 @@ $og-single-col-percentage: 100 / $og-total-cols;
 	}
 }
 
+/* Align columns in grid */
+
+.grid--top {
+	align-items: flex-start;
+
+	@include no_flexbox() {
+		vertical-align: top;
+	}
+}
+
+.grid--center {
+	align-items: center;
+
+	@include no_flexbox() {
+		vertical-align: middle;
+	}
+}
+
+.grid--bottom {
+	align-items: flex-end;
+
+	@include no_flexbox() {
+		vertical-align: bottom;
+	}
+}
+
+.grid--stretch {
+	align-items: flex-start;
+}
+
+
 /* Basic column */
 
 .col {
