@@ -47,3 +47,11 @@ There are also a few guidlines for working with the css to create a maintainable
 5. Use `/* Magic number */` when adding integer styles to modify element alignment. It makes for a quick reference when updating in the future.
 
 6. Write as much documentation and comments as possible to make the purpose of your code obvious. 
+
+## Templating
+
+Templates are compiled using Mozilla's [Nunjucks](https://mozilla.github.io/nunjucks/) templating language. All view files are stored in the `src/views` directory.
+
+## Icons
+
+To include icons as an svg sprite at the top of each page, set `config.js` to compile the icon sprite to the `src/partials` directory. The sprite can then be included as a Nunjucks partial.
