@@ -8,8 +8,7 @@ module.exports = function(env) {
 		entry: path.resolve(__dirname, config.webpack.entry),
 		output: {
 	    	path: path.resolve(__dirname, config.dest.js),
-	    	filename: config.baseNames.js + '.js',
-	    	publicPath: path.resolve(__dirname, config.dest.js)
+	    	filename: config.baseNames.js + '.js'
 		},
 		plugins: [],
 		resolve: {

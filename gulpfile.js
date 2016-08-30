@@ -240,7 +240,7 @@ gulp.task('revision', function () {
 gulp.task('rev-update-references', function(){
     var manifest = gulp.src(config.dest.path + '/rev-manifest.json');
 
-    return gulp.src(config.dest.path + '/**/**.{css,js,html}')
+    return gulp.src(config.dest.path + '/**/*.{css,js,html}')
         .pipe(revReplace({manifest: manifest}))
         .pipe(gulp.dest(config.dest.path));
 });
@@ -265,6 +265,8 @@ gulp.task(
     // Watch files for updates and inject into page
     gulp.watch(config.src.sass, ['sass']);
     gulp.watch(config.src.icons, ['svgSprite']);
+    gulp.watch(config.src.fonts, ['fonts']);
+    gulp.watch(config.src.img, ['images']);
 
     // Watch and listen for js seperately as compiling with webpack
     gulp.watch(config.src.js, ['webpack']);

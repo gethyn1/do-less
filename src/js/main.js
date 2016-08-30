@@ -7,4 +7,5 @@ let App = App || {};
 App.init = (() => {
 	console.log('Do less');
 
+	doNothing();
 })();
