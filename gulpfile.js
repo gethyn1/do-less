@@ -1,19 +1,23 @@
 'use strict';
 
-const autoprefixer  = require('gulp-autoprefixer');
-const browserSync   = require('browser-sync').create();
-const gulp          = require('gulp');
-const gulp_if       = require('gulp-if');
-const gutil         = require('gulp-util');
-var nunjucksRender  = require('gulp-nunjucks-render');
-const plumber       = require('gulp-plumber');
-const rename        = require('gulp-rename');
-const sass          = require('gulp-sass');
-const sourcemaps    = require('gulp-sourcemaps');
-const svgSprite     = require('gulp-svg-sprite');
-const webpack       = require('gulp-webpack');
-
-const config        = require('./config');
+const autoprefixer      = require('gulp-autoprefixer');
+const browserSync       = require('browser-sync').create();
+const config            = require('./config');
+const del               = require('del');
+const gulp              = require('gulp');
+const gulp_if           = require('gulp-if');
+const gulpsync          = require('gulp-sync')(gulp);
+const gutil             = require('gulp-util');
+const nunjucksRender    = require('gulp-nunjucks-render');
+const path              = require('path');
+const plumber           = require('gulp-plumber');
+const rename            = require('gulp-rename');
+const rev               = require('gulp-rev');
+const revReplace        = require('gulp-rev-replace');
+const sass              = require('gulp-sass');
+const sourcemaps        = require('gulp-sourcemaps');
+const svgSprite         = require('gulp-svg-sprite');
+const webpack           = require('gulp-webpack');
 
 
 /*
@@ -72,10 +76,10 @@ const svgOptions = {
 
 gulp.task('nunjucks', () => {
   return gulp
-    .src(config.src.templates)
+    .src(config.src.html)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(nunjucksRender({
-      path: [config.src.layouts]
+      path: [config.src.templates]
     }))
     .pipe(gulp.dest(config.dest.html));
 });
@@ -137,6 +141,26 @@ gulp.task('svgSprite', () => {
         .pipe(browserSync.stream());
 });
 
+gulp.task('svgstore', function () {
+    return gulp
+        .src(config.src.icons)
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(svgmin(function (file) {
+            var prefix = path.basename(file.relative, path.extname(file.relative));
+            return {
+                plugins: [{
+                    cleanupIDs: {
+                        prefix: prefix + '-',
+                        minify: true
+                    }
+                }]
+            }
+        }))
+        .pipe(svgstore())
+        .pipe(gulp.dest('./dist/public/icons'))
+        .pipe(browserSync.stream());
+});
+
 
 /*
  
@@ -153,10 +177,84 @@ gulp.task('copy-scripts', () => {
 
 /*
  
+ Images
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+gulp.task('images', function() {
+    return gulp 
+        .src(config.src.img + '/**/*')
+        .pipe(gulp.dest(config.dest.img))
+        // Inject images with browser sync
+        .pipe(browserSync.stream());
+});
+
+
+/*
+ 
+ Fonts
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+gulp.task('fonts', function() {
+    return gulp 
+        .src(config.src.fonts + '/**/*')
+        .pipe(gulp.dest(config.dest.fonts))
+        // Inject fonts with browser sync
+        .pipe(browserSync.stream());
+});
+
+
+/*
+ 
+ Revision
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+// Clean out the build directory
+gulp.task('clean', () => {
+    return del(
+        [
+            config.dest.path + '/rev-manifest.json',
+            config.dest.path + '/**/*'
+        ],
+        {force: true}
+    );
+});
+
+// Revision assets
+gulp.task('revision', function () {
+    // by default, gulp would pick `assets/css` as the base,
+    // so we need to set it explicitly:
+    return gulp.src(
+            [config.dest.path + '/public/**/*.{css,js,jpg,png,gif,svg}'],
+            {base: config.dest.path}
+        )
+        .pipe(rev())
+        // write rev'd assets to build dir
+        .pipe(gulp.dest(config.dest.path))
+        .pipe(rev.manifest())
+        // write manifest to build dir
+        .pipe(gulp.dest(config.dest.path));
+});
+
+
+// Update asset references
+gulp.task('rev-update-references', function(){
+    var manifest = gulp.src(config.dest.path + '/rev-manifest.json');
+
+    return gulp.src(config.dest.path + '/**/**.{css,js,html}')
+        .pipe(revReplace({manifest: manifest}))
+        .pipe(gulp.dest(config.dest.path));
+});
+
+
+/*
+ 
  BrowserSync
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-gulp.task('serve', ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts'], () => {
+gulp.task(
+    'serve', 
+    ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts', 'fonts', 'images'],
+    () => {
 
     // Setup a proxy server
     browserSync.init({
@@ -173,7 +271,10 @@ gulp.task('serve', ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts'],
     gulp.watch(config.dest.js + '/**/*.js').on('change', browserSync.reload);
 
     // Watch for changes to html
-    gulp.watch(config.src.html, ['nunjucks']).on('change', browserSync.reload);
+    gulp.watch(
+        [config.src.html, config.src.templates + '/**/*'],
+        ['nunjucks'])
+    .on('change', browserSync.reload);
 });
 
 
@@ -182,5 +283,23 @@ gulp.task('serve', ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts'],
  Primary tasks
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-gulp.task('development', ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts', 'serve']);
-gulp.task('production', ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts']);
+// We run certain tasks synchronously:
+
+// 1. Clean out build folder
+// 2. Run svg sprite to ensure compilation before included as partial
+// 3. run build processes
+// 4. revision assets or start browserSync
+
+gulp.task(
+    'development',
+    gulpsync.sync(['clean', 'svgSprite', 'serve']));
+
+gulp.task(
+    'production',
+    gulpsync.sync([
+        'clean',
+        ['svgSprite'],
+        ['nunjucks', 'sass', 'webpack', 'copy-scripts', 'fonts', 'images'],
+        'revision',
+        'rev-update-references'
+    ]));
