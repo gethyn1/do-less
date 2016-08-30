@@ -18,36 +18,20 @@
 
 .left {
 	float: left !important;
-
-	[dir="rtl"] & {
-		float: right !important;
-	}
 }
 
 .right {
 	float: right !important;
-
-	[dir="rtl"] & {
-		float: left !important;
-	}
 }
 
 .left-m {
 	@include breakpoint('m') {
 		float: left !important;
-
-		[dir="rtl"] & {
-			float: right !important;
-		}
 	}
 }
 
 .right-m {
 	@include breakpoint('m') {
 		float: right !important;
-
-		[dir="rtl"] & {
-			float: left !important;
-		}
 	}
 }
