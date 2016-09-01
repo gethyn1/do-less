@@ -1,6 +1,7 @@
 'use strict';
 
-import {doNothing} from './module';
+import {doNothing} from './modules/module';
+import * as $ from './modules/utils';
 
 let App = App || {};
 
