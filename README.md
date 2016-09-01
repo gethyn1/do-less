@@ -1,6 +1,6 @@
 # Do Less
 
-This is a basic framework to quickly get started with a front-end project. The framework focuses on speed so there are no unnecessary styles set by default (e.g. color classes, grid columns etc.), instead you should build up classes as and when they are needed. This approach should make for a lightweight css file. 
+This is a basic framework to quickly get started with a front-end project. The framework focuses on speed so there are no unnecessary styles set by default (e.g. color classes, grid columns etc.), instead you should build up classes as and when they are needed. This approach should make for a lightweight css file.
 
 ## Development directory
 
@@ -55,3 +55,7 @@ Templates are compiled using Mozilla's [Nunjucks](https://mozilla.github.io/nunj
 ## Icons
 
 To include icons as an svg sprite at the top of each page, set `config.js` to compile the icon sprite to the `src/partials` directory. The sprite can then be included as a Nunjucks partial.
+
+## Build directory
+
+All public files are compiled into the `dist` directory. This is where you should point your web server or grab the production ready templates and assets from.
