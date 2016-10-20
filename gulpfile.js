@@ -256,11 +256,22 @@ gulp.task(
     ['nunjucks', 'sass', 'webpack', 'svgSprite', 'copy-scripts', 'fonts', 'images'],
     () => {
 
-    // Setup a proxy server
-    browserSync.init({
-        proxy: config.proxy,
-        port: 3000
-    });
+    if(config.server) {
+        
+        // Setup a local server
+        browserSync.init({
+            server: config.server
+        });
+    
+    } else {
+
+        // Setup a proxy server
+        browserSync.init({
+            proxy: config.proxy,
+            port: 3000
+        });
+
+    }
 
     // Watch files for updates and inject into page
     gulp.watch(config.src.sass, ['sass']);

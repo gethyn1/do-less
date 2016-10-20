@@ -1,4 +1,5 @@
 module.exports = {
+	server: 'dist',
 	proxy: 'localhost/_dev/doless/dist',
 	webpack: {
 		entry: 'src/js/main.js',
